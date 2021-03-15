@@ -8,18 +8,18 @@ import org.springframework.context.ApplicationContext;
 
 import com.henriqueneivafood.ApiApplication;
 import com.henriqueneivafood.domain.model.Cozinha;
+import com.henriqueneivafood.domain.repository.CozinhaRepository;
 
 public class ConssultaCozinhaMain {
-	
+
 	public static void main(String[] args) {
 		ApplicationContext applicationontext = new SpringApplicationBuilder(ApiApplication.class)
-		.web(WebApplicationType.NONE)
-		.run(args);
-		
-		CadastroCozinha cadastroCozinha = applicationontext.getBean(CadastroCozinha.class);
-		List<Cozinha> cozinhas = cadastroCozinha.listar();
-		
-		for(Cozinha cozinha : cozinhas) {
+				.web(WebApplicationType.NONE).run(args);
+
+		CozinhaRepository cozinhas = applicationontext.getBean(CozinhaRepository.class);
+		List<Cozinha> todasCozinhas = cozinhas.todas();
+
+		for (Cozinha cozinha : todasCozinhas) {
 			System.out.println(cozinha.getNome());
 		}
 	}
